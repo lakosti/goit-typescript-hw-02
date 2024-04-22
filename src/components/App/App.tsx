@@ -10,14 +10,6 @@ import ImageModal from "../ImageModal/ImageModal";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import { Photo } from "./App.types";
 
-// interface Photo {
-//   alt_description: string;
-//   urls: {
-//     regular: string;
-//     small: string;
-//   };
-// }
-
 const notify = () => toast.error("Not matching results ");
 
 function App() {
