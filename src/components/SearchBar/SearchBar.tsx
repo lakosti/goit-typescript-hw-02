@@ -1,16 +1,20 @@
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, FormikValues } from "formik";
 import { IoIosSearch } from "react-icons/io";
 import css from "./SearchBar.module.css";
 import toast, { Toaster } from "react-hot-toast";
 
+interface Props {
+  onSetSearchQuery: (query: string) => void;
+}
+
 const notify = () => toast.error("Please enter something");
 
-const SearchBar = ({ onSetSearchQuery }) => {
+const SearchBar: React.FC<Props> = ({ onSetSearchQuery }) => {
   return (
     <div className={css.formWrap}>
       <Formik
         initialValues={{ query: "" }}
-        onSubmit={(values) => {
+        onSubmit={(values: FormikValues) => {
           if (values.query.trim() === "") {
             notify();
           }

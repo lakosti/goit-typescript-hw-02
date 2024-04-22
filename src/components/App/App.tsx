@@ -9,18 +9,26 @@ import "./App.module.css";
 import ImageModal from "../ImageModal/ImageModal";
 import ImageGallery from "../ImageGallery/ImageGallery";
 
+interface Photo {
+  alt_description: string;
+  urls: {
+    regular: string;
+    small: string;
+  };
+}
+
 const notify = () => toast.error("Not matching results ");
 
 function App() {
-  const [items, setItems] = useState(null);
-  const [searchQuery, SetSearchQuery] = useState("");
-  const [btnLoadMore, setBtnLoadMore] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [isError, setIsError] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [url, setUrl] = useState("");
-  const [alt, setAlt] = useState("");
+  const [items, setItems] = useState<Photo[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [btnLoadMore, setBtnLoadMore] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [url, setUrl] = useState<string>("");
+  const [alt, setAlt] = useState<string>("");
 
   useEffect(() => {
     if (searchQuery === "") {
@@ -50,8 +58,8 @@ function App() {
     fetchDataByQuery();
   }, [searchQuery, page]);
 
-  const onSetSearchQuery = (query) => {
-    SetSearchQuery(query);
+  const onSetSearchQuery = (query: string) => {
+    setSearchQuery(query);
     setIsLoading(false);
     setBtnLoadMore(false);
     setPage(1);
@@ -62,7 +70,7 @@ function App() {
     setPage((prevState) => prevState + 1);
   };
 
-  const openModal = (url, alt) => {
+  const openModal = (url: string, alt: string) => {
     setIsModalOpen(true);
     setAlt(alt);
     setUrl(url);
@@ -72,6 +80,7 @@ function App() {
     setAlt("");
     setUrl("");
   };
+
   return (
     <>
       <SearchBar onSetSearchQuery={onSetSearchQuery} />
