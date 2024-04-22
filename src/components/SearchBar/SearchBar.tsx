@@ -9,12 +9,18 @@ interface Props {
 
 const notify = () => toast.error("Please enter something");
 
+interface SearchFormValues {
+  query: string;
+}
+
 const SearchBar: React.FC<Props> = ({ onSetSearchQuery }) => {
+  const initialValues: SearchFormValues = { query: "" };
+
   return (
     <div className={css.formWrap}>
       <Formik
-        initialValues={{ query: "" }}
-        onSubmit={(values: FormikValues) => {
+        initialValues={initialValues}
+        onSubmit={(values: SearchFormValues) => {
           if (values.query.trim() === "") {
             notify();
           }
